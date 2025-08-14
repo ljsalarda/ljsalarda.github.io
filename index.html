@@ -23,25 +23,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
-<!-- <div id="preloader" style="background: url('/SKILLS/vanish.gif') center/cover no-repeat;">
-    <div class="text-container">
-      <h2>Hello, I'm</h2>
-      <h1>Leovin Jozh <br> Salarda</h1>
-      <p id="consoleText"></p>
-    </div>
-  </div> -->
   
   <main>
     
+    <div id="intro-screen">
+  <div class="intro-content">
+    <h2 class="greeting"> <span class="wave">👋</span> Hello, I'm</h2>
+    <h1 class="name">Leovin Jozh <span>Salarda</span></h1>
+    <p class="console-line">
+  console.log("<span id="typed-text"></span>");
+</p>
 
-    
+    <button id="knowMoreBtn">Know Me More</button>
+  </div>
+</div>
+
 
     <!--
       - #SIDEBAR
     -->
-
+  
     <aside class="sidebar" data-sidebar>
 
       <div class="sidebar-info">
@@ -1228,5 +1232,46 @@
   
   </p>
 </body>
+<script>
 
+
+const words = ["Student", "Aspiring Developer"];
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typedText = document.getElementById("typed-text");
+
+function typeEffect() {
+  const currentWord = words[wordIndex];
+
+  if (isDeleting) {
+    typedText.textContent = currentWord.substring(0, charIndex--);
+    if (charIndex < 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      setTimeout(typeEffect, 100); 
+      return;
+    }
+  } else {
+    typedText.textContent = currentWord.substring(0, charIndex++);
+    if (charIndex > currentWord.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 3000); 
+      return;
+    }
+  }
+
+  setTimeout(typeEffect, isDeleting ? 70 : 100);
+}
+
+typeEffect();
+
+// JS
+document.getElementById('knowMoreBtn').addEventListener('click', function() {
+  document.getElementById('intro-screen').style.display = 'none';
+  document.body.style.overflow = 'auto'; // show scrollbar again
+});
+
+
+</script>
 </html>
